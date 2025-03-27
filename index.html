@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Roblox Auto Animation Spoofer Order</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .payment-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e74c3c;
+        }
+        .submit-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #c0392b;
+        }
+        .disclaimer {
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Custom Roblox Auto Animation Spoofer</h1>
+        
+        <div class="payment-info">
+            <h3>Payment Instructions</h3>
+            <p>Before submitting your order, please send <strong>$9 USD</strong> via PayPal to:</p>
+            <p><strong>crimsonviktor@gmail.com</strong></p>
+            <p>After payment, attach a screenshot of the payment confirmation below.</p>
+        </div>
+        
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="username">Your Roblox Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="discordTag">Your Discord Tag (So we can add you after completion):</label>
+                <input type="text" id="discordTag" name="discordTag" required placeholder="e.g., username#1234">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Your Email (optional backup contact):</label>
+                <input type="email" id="email" name="email" placeholder="Only needed if we can't reach you on Discord">
+            </div>
+            
+            <div class="form-group">
+                <label for="features">Desired Features (be specific):</label>
+                <textarea id="features" name="features" required placeholder="Describe exactly what animations you want to spoof, any specific behaviors, special requirements, etc."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="paymentProof">Payment Proof (Screenshot):</label>
+                <input type="file" id="paymentProof" name="paymentProof" accept="image/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="additionalNotes">Additional Notes:</label>
+                <textarea id="additionalNotes" name="additionalNotes" placeholder="Any other information you think is important"></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit Order</button>
+        </form>
+        
+        <p class="disclaimer">
+            By submitting this order, you agree that you've already sent the payment of $9 USD to crimsonviktor@gmail.com via PayPal. 
+            Delivery time may vary based on complexity. Refunds are not available after work has begun.
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const username = document.getElementById('username').value;
+            const discordTag = document.getElementById('discordTag').value;
+            const email = document.getElementById('email').value;
+            const features = document.getElementById('features').value;
+            const additionalNotes = document.getElementById('additionalNotes').value;
+            const paymentProof = document.getElementById('paymentProof').files[0];
+            
+            // Create a FormData object to send files
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('discordTag', discordTag);
+            formData.append('email', email);
+            formData.append('features', features);
+            formData.append('additionalNotes', additionalNotes);
+            formData.append('paymentProof', paymentProof);
+            
+            // Replace with your Discord webhook URL
+            const webhookUrl = 'https://discord.com/api/webhooks/1354820876058497165/Afj_HXRtpoIg_4xdyF9-huA4O3ljLTHNGc1mf9W1EEq12pVVVb4yHaug8q8LpBnE26dI';
+            
+            const discordMessage = {
+                content: `**New Roblox Animation Spoofer Order**`,
+                embeds: [{
+                    title: "Order Details",
+                    fields: [
+                        { name: "Roblox Username", value: username },
+                        { name: "Discord Tag", value: discordTag },
+                        { name: "Email", value: email || "Not provided" },
+                        { name: "Requested Features", value: features },
+                        { name: "Additional Notes", value: additionalNotes || "None" },
+                        { name: "Payment", value: "$9 USD sent to crimsonviktor@gmail.com" }
+                    ],
+                    color: 0xe74c3c,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            // Send to Discord webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(discordMessage)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Order submitted successfully! We will contact you on Discord when your spoofer is ready.');
+                    document.getElementById('orderForm').reset();
+                } else {
+                    alert('There was an error submitting your order. Please try again or contact me directly.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your order. Please try again or contact me directly.');
+            });
+        });
+    </script>
+</body>
+</html>
